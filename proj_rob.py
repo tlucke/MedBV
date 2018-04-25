@@ -16,3 +16,4 @@ for i in range(40, 41):
     ds = pydicom.dcmread("medbv_data/P01/img00" + str(i) + ".dcm")
     plt.imshow(ds.pixel_array,0,0,0,0,norm1(0,1024,True))
     plt.show()
+#lalalalala
