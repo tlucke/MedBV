@@ -1,7 +1,6 @@
 import pydicom
 import matplotlib.pyplot as plt
 import matplotlib.colors
-print ("42")
 #from pydicom.data import get_testdata_files
 #test1 = get_testdata_files("img0001.dcm")[42]
 #ds = pydicom.dcmread("medbv_data/P01/img0015.dcm")
