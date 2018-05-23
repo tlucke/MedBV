@@ -18,6 +18,7 @@ def GroundTruthAbgleich(Segmentierung, GroundTruth):
     result = np.zeros(5)
     #Rückgabearray: [TruePositive, FalsePositive, TrueNegative, FalseNegative, Dice-Koeff.]
     #Dice-Koeff. = 2TP / (2TP + FP + FN)
+    Segmentierung = np.array(Segmentierung)
     for i in range(0, Segmentierung.shape[0]):
         for j in range(0, Segmentierung.shape[1]):
             if (Segmentierung[i][j] == 1 and GroundTruth[i][j] in [3,4]):
@@ -34,6 +35,7 @@ def GroundTruthAbgleich(Segmentierung, GroundTruth):
     return result
 #===============================================================================================
 #Testmain:
+"""
 gt = pydicom.dcmread("medbv_seg/P01/img0040.dcm")
 gtarr = gt.pixel_array
 seg = np.ones(gtarr.shape)
@@ -43,3 +45,4 @@ for i in range(0, gtarr.shape[0]):
 #array mit random 0, 1 gefüllt
 result = GroundTruthAbgleich(seg, gtarr)
 print(result)
+"""
