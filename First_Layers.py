@@ -64,6 +64,7 @@ def firstLayers(upperLayer, middleLayer, lowerLayer, parameters):
         for j in range(0,middleLayer.shape[1]):
             if(segAll[i][j] == 1): 
                 maxGrad = max(absGradUpper[i][j],absGradMiddle[i][j], absGradLower[i][j])
+                #""" (deleting # here and further down disables costraint checks)
                 if(maxGrad > gradientThreshold):
                     #local gradient too strong so likely on edge
                     segAll[i][j] = 0
@@ -73,6 +74,7 @@ def firstLayers(upperLayer, middleLayer, lowerLayer, parameters):
                     segAll[i][j] = 0
                     continue
                 #TODO:add more constraints, like local variance threshold
+                #"""
             elif(segAll[i][j] > 1):
                 segAll[i][j] = 1
     
