@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors
 import Ground_Thruth_Abgleich_3D as groundT
 import Region_Growing_v3 as rG
+import user_interaction_05 as uInter
 
 #===============================================================================================
 def firstLayers(upperLayer, middleLayer, lowerLayer, parameters):
@@ -17,7 +18,11 @@ def firstLayers(upperLayer, middleLayer, lowerLayer, parameters):
 
     #Parameters from User Interaction; TODO: change to function call on completion
     #hardcode results of user interaction here for (parameter) testing
-    SeedArray = np.array([[150,65,378],[145,65,363],[155,65,388],[150,60,397],[150,70,393]])
+    uArr = uInter.user_interaction(middleLayer)
+    SeedArray = []
+    for i in range(0, len(uArr)):
+        SeedArray.append((uArr[i][0],uArr[i][1],middleLayer[uArr[i][0]][uArr[i][1]]))
+    SeedArray = np.array(SeedArray)
     Outsider = (0,0,0)
     outsiderThreshold = Outsider[2] + parameters[3]
 
@@ -100,6 +105,7 @@ def firstLayers(upperLayer, middleLayer, lowerLayer, parameters):
 
 #===============================================================================================
 #Testmain
+"""
 layer1 = pydicom.dcmread("medbv_data/P01/img0040.dcm").pixel_array
 layer2 = pydicom.dcmread("medbv_data/P01/img0039.dcm").pixel_array
 layer3 = pydicom.dcmread("medbv_data/P01/img0041.dcm").pixel_array
@@ -116,3 +122,4 @@ plt.imshow(gt)
 plt.show()
 result = groundT.GroundTruthAbgleich(seg1, gt)
 print(result)
+"""

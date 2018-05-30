@@ -21,17 +21,18 @@ def RegionGrowing(PixelArray,SeedArray, threshold, seedThreshold, maxDist, Outsi
         #Abstand zum Outsider-Value, ab dem verworfen wird, Annahme: Outsider-Wert kleiner Leberwerte
     #maxDist = 5 #max region growing iterations resultion in max distance from seed point
 
+    print(len(SeedArray))
     
     validSeedFlag = 0 #flag indicating if there's at least one valid seed
     activeLabels = []
-    for i in range(0,SeedArray.shape[0]): #for all possible seeds
+    for i in range(0,len(SeedArray)): #for all possible seeds
         if(abs(SeedArray[i][2] - PixelArray[SeedArray[i][0]][SeedArray[i][1]]) < seedThreshold):
             #if difference to earlier slice smaller threshold
             activeLabels.append(RegionLabel(SeedArray[i],i+1))
             #create new label in array at position = i = labelname-1
             validSeedFlag = 1
         else:
-            print(SeedArray[i][2] , PixelArray[SeedArray[i][0]][SeedArray[i][1]])
+            #print(SeedArray[i][2] , PixelArray[SeedArray[i][0]][SeedArray[i][1]])
             activeLabels.append(0) 
     
     result = []

@@ -32,6 +32,7 @@ def GroundTruthAbgleich(Segmentierung, GroundTruth):
     #Vergleich; 4 Kombinationen
     result[4] = (2*result[0]) / (2*result[0] + result[1] + result[3])
     #Berechnen Dice-Koeff.
+    print(result)
     return result
 #===============================================================================================
 #Testmain:
