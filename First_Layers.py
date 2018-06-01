@@ -8,7 +8,7 @@ import Region_Growing_v3 as rG
 import user_interaction_05 as uInter
 
 #===============================================================================================
-def firstLayers(upperLayer, middleLayer, lowerLayer, parameters):
+def firstLayers(upperLayer, middleLayer, lowerLayer, parameters, uArr):
     #Input: PixelArrays of the middle +/- 1 Layers; Array with several parameters
     
     #Parameters for Region Growing
@@ -18,13 +18,17 @@ def firstLayers(upperLayer, middleLayer, lowerLayer, parameters):
 
     #Parameters from User Interaction; TODO: change to function call on completion
     #hardcode results of user interaction here for (parameter) testing
-    uArr = uInter.user_interaction(middleLayer)
+    """uArr = uInter.user_interaction(middleLayer)
+    moved to main, uArr is now argument of the function"""
     SeedArray = []
     for i in range(0, len(uArr)):
         SeedArray.append((uArr[i][0],uArr[i][1],middleLayer[uArr[i][0]][uArr[i][1]]))
     SeedArray = np.array(SeedArray)
-    Outsider = (0,0,0)
+    #fuegt den Positionen aus der UserInteraction die Werte hinzu
+    """Outsider = (0,0,0)
     outsiderThreshold = Outsider[2] + parameters[3]
+    now modified in main"""
+    outsiderThreshold = parameters[3]
 
     #Parameters for further processing
     gradientThreshold = parameters[4] #threshold for squared gradient
@@ -33,10 +37,12 @@ def firstLayers(upperLayer, middleLayer, lowerLayer, parameters):
     #Idee: thresholds durch Streuung und Wertebereich des SeedArrays/Outsiders anpassen
 
     #Inital Region Growing on Layers
-    segUpper = rG.RegionGrowing(upperLayer,SeedArray,threshold,seedThreshold,maxDist)
-    segMiddle = rG.RegionGrowing(middleLayer,SeedArray,threshold,seedThreshold,maxDist)
-    segLower = rG.RegionGrowing(lowerLayer,SeedArray,threshold,seedThreshold,maxDist)
+    params = [threshold, seedThreshold, maxDist, outsiderThreshold]
+    segUpper = rG.RegionGrowing(upperLayer,SeedArray,params)
+    segMiddle = rG.RegionGrowing(middleLayer,SeedArray,params)
+    segLower = rG.RegionGrowing(lowerLayer,SeedArray,params)
     #no splits expected -> fuse labels
+    #TODO Fehlerhafte Annahme! Aendern, wenn Splits in der Main behandelt!
     segUppertmp = segUpper[0]
     for i in range(1,len(segUpper)):
         segUppertmp = segUppertmp + segUpper[i]
@@ -100,7 +106,6 @@ def firstLayers(upperLayer, middleLayer, lowerLayer, parameters):
     #shifts back up "shift" row/column after down/right shift due to closing
     #"deletes" top row/column, doubles bottom row/column
     #no errors expected, since region is irrelevant
-
     return result
 
 #===============================================================================================

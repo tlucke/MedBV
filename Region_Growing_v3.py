@@ -10,33 +10,37 @@ import Ground_Thruth_Abgleich_3D as groundT
 # - sollte im Normalbetrieb allerdings kein Problem darstellen, da Zielbereich recht zentral liegt
 
 #===============================================================================================
-def RegionGrowing(PixelArray,SeedArray, threshold, seedThreshold, maxDist, Outsider = (0,0,0)):
+def RegionGrowing(PixelArray,SeedArray, parameters):
     #Input Dicom-PixelArray, Array der Seedpoints des Gitters und ihrer Werte in vorheriger Schicht, 
     #Punkt außerhalb der Leber (optional)
 
     #Parameters
-    #threshold = 20 #threshold region growing
-    #seedThreshold = 20 #threshold reject seed point
-    outThreshold = Outsider[2] + 10 
+    threshold = parameters[0] #threshold region growing
+    seedThreshold = parameters[1] #threshold reject seed point
+    maxDist = parameters[2] #max region growing iterations resultion in max distance from seed point
+    outThreshold = parameters[3] 
         #Abstand zum Outsider-Value, ab dem verworfen wird, Annahme: Outsider-Wert kleiner Leberwerte
-    #maxDist = 5 #max region growing iterations resultion in max distance from seed point
 
     print(len(SeedArray))
     
     validSeedFlag = 0 #flag indicating if there's at least one valid seed
     activeLabels = []
+    seg_labeled = np.zeros(PixelArray.shape)
+
     for i in range(0,len(SeedArray)): #for all possible seeds
         if(abs(SeedArray[i][2] - PixelArray[SeedArray[i][0]][SeedArray[i][1]]) < seedThreshold):
             #if difference to earlier slice smaller threshold
             activeLabels.append(RegionLabel(SeedArray[i],i+1))
             #create new label in array at position = i = labelname-1
             validSeedFlag = 1
+            seg_labeled[SeedArray[i][0]][SeedArray[i][1]] += i+1
+            #mark valid seed point in segmentation
         else:
             #print(SeedArray[i][2] , PixelArray[SeedArray[i][0]][SeedArray[i][1]])
             activeLabels.append(0) 
     
     result = []
-    seg_labeled = np.zeros(PixelArray.shape)
+    
     if(validSeedFlag == 0): #if there are no valid seeds return empty segmentation
         print("no valid seeds")
         result.append(seg_labeled)
@@ -53,6 +57,9 @@ def RegionGrowing(PixelArray,SeedArray, threshold, seedThreshold, maxDist, Outsi
                 surrPix = [ (tmp[0]-1,tmp[1]) , (tmp[0],tmp[1]-1) , (tmp[0]+1,tmp[1]) , (tmp[0],tmp[1]+1) ]
                 #Pixel in 4er-Nachbarschaft
                 for k in range(0,4):
+                    if(surrPix[k][0] < 0 or surrPix[k][0] >= PixelArray.shape[0]
+                    or surrPix[k][1] < 0 or surrPix[k][1] >= PixelArray.shape[1]):
+                        continue
                     tmpValue = int(seg_labeled[surrPix[k][0]][surrPix[k][1]])
                     if(tmpValue != 0):
                         #Pixel in Nachbarschaft schon gelabeled
