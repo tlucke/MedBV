@@ -9,7 +9,7 @@ import pydicom
 import cv2 as cv
 import numpy as np
 
-def next_seeds(previmg, prevseg, nextimg):
+def next_seeds(previmg, prevseg):
 	'''
 	sets new seeds for a new layer of DICOM data by comparing a given previous layer, using 
 	its segmentation, with its successor.
@@ -33,7 +33,6 @@ def next_seeds(previmg, prevseg, nextimg):
 	
 	previmgarr = np.array(previmg)
 	prevsegarr = np.array(prevseg)
-	nextimgarr = np.array(nextimg)
 	
 	'''
 	for: iterate through the segmentation
