@@ -27,7 +27,7 @@ def mouse_callback2(event, x, y, flags, params):
 def user_interaction(image):
 	choice = ""
 	while(choice != "q"):
-		choice = input("Please select mode: 1. Inside values\n2. Outside values\nq. Quit")
+		choice = input("Please select mode:\n1. Inside values\n2. Outside values\nq. Quit\n-->")
 		plt.imsave("imgtest",image)
 		img = cv2.imread("imgtest.png", 0)
 		
