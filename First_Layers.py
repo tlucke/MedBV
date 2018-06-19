@@ -3,8 +3,8 @@ import numpy as np
 import cv2 as cv
 import matplotlib.pyplot as plt
 import matplotlib.colors
-import Ground_Thruth_Abgleich_3D as groundT
-import Region_Growing_v3 as rG
+import Ground_Truth_Abgleich_3D as groundT
+import Region_Growing_v5 as rG
 import user_interaction_05 as uInter
 
 #===============================================================================================
@@ -80,10 +80,13 @@ def firstLayers(upperLayer, middleLayer, lowerLayer, parameters, uArr):
                     #local gradient too strong so likely on edge
                     segAll[i][j] = 0
                     continue
+                """
                 if(min(upperLayer[i][j],middleLayer[i][j],lowerLayer[i][j]) < outsiderThreshold):
                     #value to close to assumed outside values
                     segAll[i][j] = 0
                     continue
+                #ueberfluessig, da Schwellwertsegmentierung in Region_Growing
+                """
                 #TODO:add more constraints, like local variance threshold
                 #"""
             elif(segAll[i][j] > 1):
@@ -106,6 +109,7 @@ def firstLayers(upperLayer, middleLayer, lowerLayer, parameters, uArr):
     #shifts back up "shift" row/column after down/right shift due to closing
     #"deletes" top row/column, doubles bottom row/column
     #no errors expected, since region is irrelevant
+    #TODO check if shift already in closing included!
     return result
 
 #===============================================================================================

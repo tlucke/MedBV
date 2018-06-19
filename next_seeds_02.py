@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon May 28 17:24:46 2018
-
 @author: Thorsten
 """
 
@@ -45,7 +44,7 @@ def next_seeds(previmg, prevseg):
 	
 	#threshold = 3 #TODO: Play around with threshold for possible better results
 	
-	n = 5	#block size
+	n = 10	#block size
 	m = int(n/2)
 	for j in range(m, 320-m):       #change to image shape
 		for i in range(m, 320-m):
@@ -64,7 +63,6 @@ def next_seeds(previmg, prevseg):
 prev = pydicom.dcmread("medbv_data/P01/img0020.dcm")
 prevseg = pydicom.dcmread("medbv_seg/P01/img0020.dcm")
 nxt = pydicom.dcmread("medbv_data/P01/img0021.dcm")
-
 newseeds = next_seeds(prev, prevseg, nxt)
 print(newseeds)
 '''
