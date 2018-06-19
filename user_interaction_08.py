@@ -28,18 +28,18 @@ def user_interaction(image):
 	choice = ""
 	
 	print("1. Select points inside the liver (INSIDE VALUES).\n2. Select a point outside the liver (OUTSIDE VALUE).\n")
-	#plt.imsave("imgtest",image)
-	#img = cv2.imread("imgtest.png", 0)
+	plt.imsave("imgtest",image)
+	img = cv2.imread("imgtest.png", 0)
 	
 	
 	cv2.namedWindow('INSIDE VALUES')
 	cv2.setMouseCallback('INSIDE VALUES', mouse_callback1)
-	cv2.imshow('INSIDE VALUES', img)
+	cv2.imshow('INSIDE VALUES', image)
 	cv2.waitKey(0)
 	
 	cv2.namedWindow('OUTSIDE VALUE')
 	cv2.setMouseCallback('OUTSIDE VALUE', mouse_callback2)
-	cv2.imshow('OUTSIDE VALUE', img)
+	cv2.imshow('OUTSIDE VALUE', image)
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
 		
