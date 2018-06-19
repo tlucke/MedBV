@@ -25,7 +25,7 @@ def mouse_callback2(event, x, y, flags, params):
 		print(outside_value)
 
 def user_interaction(image):
-	choice = ""
+
 	
 	print("1. Select points inside the liver (INSIDE VALUES).\n2. Select a point outside the liver (OUTSIDE VALUE).\n")
 	plt.imsave("imgtest",image)
@@ -34,12 +34,12 @@ def user_interaction(image):
 	
 	cv2.namedWindow('INSIDE VALUES')
 	cv2.setMouseCallback('INSIDE VALUES', mouse_callback1)
-	cv2.imshow('INSIDE VALUES', image)
+	cv2.imshow('INSIDE VALUES', img)
 	cv2.waitKey(0)
 	
 	cv2.namedWindow('OUTSIDE VALUE')
 	cv2.setMouseCallback('OUTSIDE VALUE', mouse_callback2)
-	cv2.imshow('OUTSIDE VALUE', image)
+	cv2.imshow('OUTSIDE VALUE', img)
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
 		
