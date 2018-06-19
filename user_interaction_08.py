@@ -44,7 +44,7 @@ def user_interaction(image):
 	cv2.destroyAllWindows()
 		
 	return mouse_coordinates, outside_value
-
+'''
 path_image = "medbv_data/P01/img0020.dcm"
 ds = pydicom.dcmread(path_image)
 plt.imsave("imgtest", ds.pixel_array)
@@ -53,6 +53,6 @@ in_coordinates, out_coordinates = user_interaction(img)
 print(in_coordinates)
 print(out_coordinates)
 #print("Coordinates: " + str(coordinates))
-
+'''
 			
 			
