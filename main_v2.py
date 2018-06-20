@@ -6,7 +6,7 @@ import matplotlib.colors
 import Ground_Truth_Abgleich_3D as groundT
 import Region_Growing_v5 as rG
 import user_interaction_08 as uInter
-import next_seeds_02 as nSeed
+import next_seeds_03 as nSeed
 import First_Layers as fL
 
 

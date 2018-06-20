@@ -21,7 +21,7 @@ def RegionGrowing(PixelArray,SeedArray, parameters):
     outThreshold = parameters[3] 
         #Abstand zum Outsider-Value, ab dem verworfen wird, Annahme: Outsider-Wert kleiner Leberwerte
 
-    print(len(SeedArray))
+    #print(len(SeedArray))
     
     validSeedFlag = 0 #flag indicating if there's at least one valid seed
     activeLabels = []
@@ -46,7 +46,7 @@ def RegionGrowing(PixelArray,SeedArray, parameters):
     result = []
     
     if(validSeedFlag == 0): #if there are no valid seeds return empty segmentation
-        print("no valid seeds")
+        #print("no valid seeds")
         result.append(seg_labeled)
         return (result)
 

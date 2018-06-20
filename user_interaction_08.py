@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jun 13 09:39:13 2018
-
 @author: Thorsten
 """
 
@@ -16,13 +15,13 @@ def mouse_callback1(event, x, y, flags, params):
 	if event == cv2.EVENT_LBUTTONDOWN:
 		global mouse_coordinates
 		mouse_coordinates.append([y,x])
-		print(mouse_coordinates)
+		#print(mouse_coordinates)
 
 def mouse_callback2(event, x, y, flags, params):
 	if event == cv2.EVENT_LBUTTONDOWN:
 		global outside_value
 		outside_value.append([y,x])
-		print(outside_value)
+		#print(outside_value)
 
 def user_interaction(image):
 
@@ -54,5 +53,3 @@ print(in_coordinates)
 print(out_coordinates)
 #print("Coordinates: " + str(coordinates))
 '''
-			
-			
