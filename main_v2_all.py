@@ -11,10 +11,10 @@ import First_Layers as fL
 
 
     #==========================================================================================
-def allSets(number):
+def allSets(number,numberSlices):
     #Main
     satz = number #Datensatz
-    bildzahl = 80 #Anzahl Schichten im Datensatz
+    bildzahl = numberSlices #Anzahl Schichten im Datensatz
     mitte = int(bildzahl / 2)
 
     #Schema zum Einlesen eines Bildes; einsetzen für "bild"
@@ -136,10 +136,19 @@ def allSets(number):
     plt.imshow(visualizeImgUpper)
     plt.show()
     #print(result)
-    print("Satznummer: " + str(i) + "; Gesamt-3D-Dice-Koeffizient: " + str(((2*result[0]) / (2*result[0] + result[1] + result[3]))) )
+    print("Satznummer: " + str(satz) + "; Gesamt-3D-Dice-Koeffizient: " + str(((2*result[0]) / (2*result[0] + result[1] + result[3]))) )
 
 #==============================================================================
-for i in range(2,12):
-    allSets(i)
+#allSets(1,80)
+#allSets(2,80)
+#allSets(3,80)
+#allSets(4,80)
+#allSets(5,75)
+#allSets(6,80)
+#allSets(8,93)
+#allSets(9,80)
+#allSets(10,80)
+#allSets(11,80)
+#allSets(12,70)
 
         
